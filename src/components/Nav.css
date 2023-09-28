@@ -1,0 +1,36 @@
+.navbar {
+    background-color: #8A669B;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo {
+    display: flex;
+    justify-content: space-between;
+}
+  
+.logo img {
+    max-width: 170px;
+}
+.usuario img {
+    max-width: 40px;
+}
+  
+.nav-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 40px;
+}
+  
+.nav-links a {
+    text-decoration: none;
+    color: #FBF8F9;
+    font-weight:600;
+    font-size: 18px;
+}
+.name{
+    align-content: center;
+}

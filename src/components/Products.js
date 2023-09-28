@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Products.css';
+import { Link } from 'react-router-dom';
+import Nav from './Nav';
+import Header from '../resources/Header.png';
+
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -32,11 +36,16 @@ function Products() {
 
   return (
     <div className="showProd">
+    <Nav/>
+      <img src={Header} alt="header" className="header"/>
+      
       <div className='buttonShow'>
+      
+        <p>Se están mostrando {visibleProducts.length} de {products.length} productos</p>
         <button onClick={toggleShowAll}>
             {showAll ? 'Ver Menos' : 'Ver Más'}
         </button>
-        <p>Se están mostrando {visibleProducts.length} de {products.length} productos</p>
+        
       </div>
       <div className="products">
         {visibleProducts.map((product) => (
@@ -48,13 +57,14 @@ function Products() {
             </div>
             <div className="info">
               <h2>{product.title}</h2>
-              <p>${product.price}</p>
-              <p>Categoría: {product.category}</p>
+              <p id="precio">${product.price}</p>
+              <p>Category: {product.category}</p>
+              <Link to={`/products/${product.id}`} className='buttonDetails'>See details</Link>
             </div>
           </div>
         ))}
       </div>
-      <p>
+      <p className='name'>
         Autor del ejercicio: María José Casanova - 0000223374
       </p>
     </div>

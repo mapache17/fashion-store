@@ -39,18 +39,17 @@ function Products() {
     <Nav/>
       <img src={Header} alt="header" className="header"/>
       
-      <div className='buttonShow'>
-      
+      <div id='buttonShow1'>
         <p>Se están mostrando {visibleProducts.length} de {products.length} productos</p>
         <button onClick={toggleShowAll}>
             {showAll ? 'Ver Menos' : 'Ver Más'}
         </button>
         
       </div>
-      <div className="products">
+      <div id="products1">
         {visibleProducts.map((product) => (
-          <div key={product.id} className="card">
-            <div className="image">
+          <div key={product.id} className="card-products">
+            <div className="image-prod">
               <div className="product-image">
                 <img src={product.image} alt={product.title} />
               </div>
@@ -59,7 +58,7 @@ function Products() {
               <h2>{product.title}</h2>
               <p id="precio">${product.price}</p>
               <p>Category: {product.category}</p>
-              <Link to={`/products/${product.id}`} className='buttonDetails'>See details</Link>
+              <Link to={`/products/${product.id}`} className='buttonDetails-product'>See details</Link>
             </div>
           </div>
         ))}

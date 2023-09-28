@@ -15,7 +15,7 @@ function Nav() {
       <Link to="/">
         <HomeOutlined /> Home
       </Link>
-      <Link to="/cart">
+      <Link to="/shopping-cart">
         <ShoppingCartOutlined /> Carrito de compras
       </Link>
       </ul>

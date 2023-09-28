@@ -1,64 +1,74 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-//import './detail.css';
+import './Detail.css';
 import Nav from './Nav';
+import Details from '../resources/Details.png';
+
 
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://fakestoreapi.com/products/${id}`);
         if (!response.ok) {
           throw new Error('Ha ocurrido un error');
         }
-        return response.json();
-      })
-      .then((data) => {
+        const data = await response.json();
         setProduct(data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('Ha ocurrido un error', error);
-      });
+      }
+    };
+
+    fetchData();
   }, [id]);
+
 
   if (!product) {
     return <div>Cargando...</div>;
   }
 
   const addToCart = () => {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
-      currentCart.push(product);
-      localStorage.setItem('cart', JSON.stringify(currentCart));
+    if (typeof window === 'undefined' || !window.localStorage) {
+      return;
     }
+    const storedCart = localStorage.getItem('cart');
+    const currentCart = storedCart ? JSON.parse(storedCart) : [];
+    currentCart.push(product);
+    localStorage.setItem('cart', JSON.stringify(currentCart));
   };
+  
 
   return (
-    <div className='container'>
-      <div className='navbar-container'>
-        <Nav />
-      </div>
-      <div className='all-container'>
-        <div className='detail-container'>
-          <div key={product.id} className="card-detail">
+    <div>
+      <Nav />
+      <img src={Details} alt="header" className="details-header"/>
+      <div className='all-container-details'>
+        <div className='detail-container-details'>
+          <div key={product.id} className="card-details">
             <div className="image-detail">
-              <div className="product-image-detail">
+              <div className="product-detail">
                 <img src={product.image} alt={product.title} />
               </div>
             </div>
+            <div>
             <div className="detail">
               <h2>{product.title}</h2>
-              <p>Precio: ${product.price}</p>
-              <p>Categoría: {product.category}</p>
-              <p>Descripción: {product.description}</p>
+              <p>Price: ${product.price}</p>
+              <p>Category: {product.category}</p>
+              <p>Description: {product.description}</p>
+            </div>
+            
+            <button onClick={addToCart} className='cart-button'>
+          <Link to="/shopping-cart">Add to cart</Link>
+        </button>
             </div>
           </div>
         </div>
-        <button onClick={addToCart} className='cart-button'>
-          <Link to="/cart">Añadir al carrito</Link>
-        </button>
+        
       </div>
     </div>
   );

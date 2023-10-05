@@ -3,36 +3,38 @@ import './Products.css';
 import { Link } from 'react-router-dom';
 import Nav from './Nav';
 import Header from '../resources/Header.png';
+import { useAppContext } from '../AppContext';
 
 
 function Products() {
-  const [products, setProducts] = useState([]);
+  //const [products, setProducts] = useState([]);
   const [showAll, setShowAll] = useState(true);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch('https://fakestoreapi.com/products');
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-
-    fetchData();
-  }, []);
+  const {state, dispatch} = useAppContext();
 
   const toggleShowAll = () => {
     setShowAll(!showAll);
   };
 
+  const products = state.products;
   const visibleProducts = showAll ? products : products.slice(0, 6);
+
+
+  useEffect(() => {
+    fetch('https://fakestoreapi.com/products')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Ha ocurrido un error');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        dispatch({ type: 'SET_PRODUCTS', payload: data });
+      })
+      .catch((error) => {
+        console.error('Ha ocurrido un error', error);
+      });
+  }, [dispatch]);
+
 
   return (
     <div className="showProd">

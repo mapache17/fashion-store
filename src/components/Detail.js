@@ -3,11 +3,13 @@ import { Link, useParams } from 'react-router-dom';
 import './Detail.css';
 import Nav from './Nav';
 import Details from '../resources/Details.png';
+import { useAppContext } from '../AppContext';
 
 
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const { dispatch } = useAppContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +41,8 @@ function ProductDetail() {
     const currentCart = storedCart ? JSON.parse(storedCart) : [];
     currentCart.push(product);
     localStorage.setItem('cart', JSON.stringify(currentCart));
+    const action = { type: 'ADD_TO_CART', payload: product };
+    dispatch(action);
   };
   
 

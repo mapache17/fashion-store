@@ -1,22 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Cart.css';
 import Nav from './Nav';
 import SCart from '../resources/SCart.png';
-
+import {useAppContext} from '../AppContext';
 
 function Cart() {
-    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-  
-    const total = cartItems.reduce((accumulator, product) => accumulator + product.price, 0);
-  
+    const { state } = useAppContext();
+    const total = state.cart.reduce((accumulator, product) => accumulator + product.price, 0);
+
     return (
       <div className='container'>
         <Nav />
         <img src={SCart} alt="header" className="cart-header" />
         <div className='cart-content'>
           <div className='cart-container'>
-            {cartItems.map((product) => (
+            {state.cart.map((product) => (
               <li key={product.id} className='card-cart'>
                 <div className="image-cart">
                   <div className="prod-image">

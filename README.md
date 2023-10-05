@@ -2,9 +2,10 @@
 
 ## Interfaz principal de productos:
 
-![image](https://github.com/mapache17/fashion-store/assets/91903899/c4ce97a8-bd0a-4335-845c-74b749cef6fa)
+![image](https://github.com/mapache17/fashion-store/assets/91903899/de1aa9a4-c1eb-4e7b-95f6-2c4aa240b659)
 
-![image](https://github.com/mapache17/fashion-store/assets/91903899/aec6c600-525b-4257-8239-ba11e5761585)
+![image](https://github.com/mapache17/fashion-store/assets/91903899/e92bdd38-c3ca-4c47-98ca-930c3c9f2993)
+
 
 ### Detalles de un producto:
 

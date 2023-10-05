@@ -1,5 +1,9 @@
 # East City Trends - Fake Store
 
+María José Casanova - 0000223374
+
+Los cambios para la última tarea se encuentran en la rama feature/filterContextReducer y las evidencias, se encuentran en el README de la misma.
+
 ## Interfaz principal de productos:
 
 ![image](https://github.com/mapache17/fashion-store/assets/91903899/c4ce97a8-bd0a-4335-845c-74b749cef6fa)

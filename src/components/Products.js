@@ -10,14 +10,24 @@ function Products() {
   //const [products, setProducts] = useState([]);
   const [showAll, setShowAll] = useState(true);
   const {state, dispatch} = useAppContext();
-
+  const [selectedCategory, setSelectedCategory] = useState("Todos");
+  
   const toggleShowAll = () => {
     setShowAll(!showAll);
   };
 
-  const products = state.products;
-  const visibleProducts = showAll ? products : products.slice(0, 6);
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
 
+  const products = state.products;
+  let visibleProducts = showAll ? products : products.slice(0, 6);
+  
+  if (selectedCategory !== "Todos") {
+    visibleProducts = visibleProducts.filter(
+      (product) => product.category === selectedCategory
+    );
+  }
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
@@ -42,11 +52,19 @@ function Products() {
       <img src={Header} alt="header" className="header"/>
       
       <div id='buttonShow1'>
-        <p>Se están mostrando {visibleProducts.length} de {products.length} productos</p>
-        <button onClick={toggleShowAll}>
-            {showAll ? 'Ver Menos' : 'Ver Más'}
-        </button>
-        
+        <select onChange={(e) => handleCategoryChange(e.target.value)} value={selectedCategory}>
+          <option value="Todos">All</option>
+          <option value="men's clothing">Men's clothing</option>
+          <option value="jewelery">Jewelery</option>
+          <option value="electronics">Electronics</option>
+          <option value="women's clothing">Women's clothing</option>
+        </select>
+        <div id="buuton">
+          <p>Se están mostrando {visibleProducts.length} de {products.length} productos</p>
+          <button onClick={toggleShowAll}>
+              {showAll ? 'Ver Menos' : 'Ver Más'}
+          </button>
+        </div>
       </div>
       <div id="products1">
         {visibleProducts.map((product) => (
